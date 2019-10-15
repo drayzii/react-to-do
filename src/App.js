@@ -1,25 +1,25 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import { BrowserRouter as Router, Route } from "react-router-dom";
+import { ToDoProvider } from "./ToDoContext";
+import "./App.css";
+
+import Header from "./components/Header";
+import CompletedToDoList from "./components/CompletedToDoList";
+import UnCompletedToDoList from "./components/UnCompletedToDoList";
+import ToDoList from "./components/ToDoList";
+import AddToDo from "./components/AddToDo";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <ToDoProvider>
+      <Router>
+        <Header />
+        <Route path="/" exact component={ToDoList} />
+        <Route path="/pending" exact component={UnCompletedToDoList} />
+        <Route path="/done" exact component={CompletedToDoList} />
+        <Route path="/add" exact component={AddToDo} />
+      </Router>
+    </ToDoProvider>
   );
 }
 
